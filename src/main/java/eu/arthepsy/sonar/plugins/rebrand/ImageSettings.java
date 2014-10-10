@@ -1,0 +1,66 @@
+/*
+ * Rebrand
+ * Copyright (C) 2014 Andris Raugulis
+ * moo@arthepsy.eu
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+package eu.arthepsy.sonar.plugins.rebrand;
+
+import org.apache.commons.lang.StringUtils;
+import org.sonar.api.config.Settings;
+import org.apache.commons.lang.StringEscapeUtils;
+
+public class ImageSettings {
+    private final Settings settings;
+    private final String prefix;
+
+    public ImageSettings(Settings settings, String prefix) {
+        this.settings = settings;
+        this.prefix = prefix;
+    }
+
+    public String getImageUrl() {
+        return this.escape(settings.getString(this.prefix + RebrandConfiguration.IMAGE_SOURCE));
+    }
+
+    public Integer getWidth() {
+        return settings.getInt(this.prefix + RebrandConfiguration.IMAGE_WIDTH);
+    }
+
+    public Integer getHeight() {
+        return settings.getInt(this.prefix + RebrandConfiguration.IMAGE_HEIGHT);
+    }
+
+    public String getLinkUrl() {
+        return this.escape(settings.getString(this.prefix + RebrandConfiguration.IMAGE_LINK));
+    }
+
+    public String getCssStyle() {
+        return this.escape(settings.getString(this.prefix + RebrandConfiguration.IMAGE_STYLE));
+    }
+
+    private String escape(String value) {
+        if (StringUtils.isEmpty(value)) {
+            return "";
+        } else {
+            return StringEscapeUtils.escapeHtml(value.replaceAll("'", "#&39;"));
+        }
+    }
+}
