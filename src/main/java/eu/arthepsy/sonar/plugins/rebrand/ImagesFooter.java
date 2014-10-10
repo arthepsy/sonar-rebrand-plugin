@@ -51,7 +51,7 @@ public class ImagesFooter implements Footer {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("<script>\n");
+        sb.append("\n<script>\n");
         sb.append("\t$j(document).ready(function() {\n");
         if (hasSidebarImage) {
             sb.append(this.createImageHtml(sidebarImage));
