@@ -11,12 +11,15 @@
     </parent>
 
     <artifactId>sonar-rebrand-plugin</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <packaging>sonar-plugin</packaging>
 
     <name>Rebrand</name>
     <description>SonarQube rebranding plugin</description>
     <url></url>
+    <organization>
+        <name>${dev.name}</name>
+    </organization>
     <licenses>
         <license>
             <name>MIT</name>
