@@ -24,15 +24,15 @@
 package eu.arthepsy.sonar.plugins.rebrand;
 
 import com.google.common.collect.ImmutableList;
-import eu.arthepsy.sonar.plugins.rebrand.RebrandConfiguration;
 import org.sonar.api.SonarPlugin;
+
 import java.util.List;
 
 public class RebrandPlugin extends SonarPlugin {
 
     @Override
     public List getExtensions() {
-        ImmutableList.Builder builder = ImmutableList.builder();
+        ImmutableList.Builder<Object> builder = ImmutableList.builder();
         builder.addAll(RebrandConfiguration.getPropertyDefinitions());
         builder.add(ImagesFooter.class);
         return builder.build();
