@@ -24,11 +24,8 @@
 package eu.arthepsy.sonar.plugins.rebrand;
 
 import com.google.common.collect.ImmutableList;
-import org.sonar.api.CoreProperties;
 import org.sonar.api.PropertyType;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.api.config.PropertyFieldDefinition;
-import org.sonar.api.resources.Qualifiers;
 
 import java.util.List;
 
@@ -37,6 +34,7 @@ public class RebrandConfiguration {
     public static final String CATEGORY = "Rebranding";
 
     public static final String ORIGINAL_LOGO_VISIBLE = "sonar.rebrand.original.logo.visible";
+    public static final String ORIGINAL_FOOTER_VISIBLE = "sonar.rebrand.original.footer.visible";
 
     public static final String SIDEBAR_PREFIX = "sonar.rebrand.sidebar.";
     public static final String CONTENT_PREFIX = "sonar.rebrand.content.";
@@ -90,6 +88,12 @@ public class RebrandConfiguration {
                 .category(CATEGORY).subCategory(generalCategory)
                 .index(0).name("SonarQube logo")
                 .description("Visibility of SonarQube logo")
+                .type(PropertyType.BOOLEAN).defaultValue("true")
+                .build());
+        properties.add(PropertyDefinition.builder(ORIGINAL_FOOTER_VISIBLE)
+                .category(CATEGORY).subCategory(generalCategory)
+                .index(0).name("SonarQube footer")
+                .description("Visibility of SonarQube footer")
                 .type(PropertyType.BOOLEAN).defaultValue("true")
                 .build());
         properties.addAll(getImagePropertyDefinitions(SIDEBAR_PREFIX, "Sidebar"));

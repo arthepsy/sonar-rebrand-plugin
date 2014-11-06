@@ -39,13 +39,14 @@ public class ImagesFooter implements Footer {
         ImageSettings sidebarImage = new ImageSettings(this.settings, RebrandConfiguration.SIDEBAR_PREFIX);
         ImageSettings contentImage = new ImageSettings(this.settings, RebrandConfiguration.CONTENT_PREFIX);
         boolean originalLogoVisible = settings.getBoolean(RebrandConfiguration.ORIGINAL_LOGO_VISIBLE);
+        boolean originalFooterVisible = settings.getBoolean(RebrandConfiguration.ORIGINAL_FOOTER_VISIBLE);
 
         String sidebarImageUrl = sidebarImage.getImageUrl();
         boolean hasSidebarImage = !StringUtils.isEmpty(sidebarImageUrl);
         String contentImageUrl = contentImage.getImageUrl();
         boolean hasContentImage = !StringUtils.isEmpty(contentImageUrl);
 
-        if (originalLogoVisible && !hasSidebarImage && !hasContentImage) {
+        if (originalLogoVisible && originalFooterVisible && !hasSidebarImage && !hasContentImage) {
             return "";
         }
 
@@ -75,6 +76,9 @@ public class ImagesFooter implements Footer {
         }
         if (! originalLogoVisible) {
             sb.append("\t$j('img[src^=\"/images/logo\"]').parent().remove();\n");
+        }
+        if (! originalFooterVisible) {
+            sb.append("\t$j('#footer').remove();\n");
         }
         sb.append("\t});\n");
         sb.append("</script>\n");
